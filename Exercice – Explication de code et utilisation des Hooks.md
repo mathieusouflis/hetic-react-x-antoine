@@ -140,10 +140,15 @@ import React, { useReducer } from "react";
 
 function reducer(state, action) {
   switch (action.type) {
-    // TODO
-    default:
-      return state;
-  }
+     case "increment":
+       return { count: state.count + 1 };
+     case "decrement":
+       return { count: state.count - 1 };
+     case "reset":
+       return { count: 0 };
+     default:
+       return state;
+   }
 }
 
 export default function CounterReducer() {
@@ -152,7 +157,10 @@ export default function CounterReducer() {
 
   return (
     <div className="p-4 bg-slate-800 rounded-lg text-white">
-
+      <p>Compteur : {state.count}</p>
+      <button onClick={() => dispatch({ type: "increment" })} className="bg-green-600 hover:bg-green-700 px-4 py-2 rounded mb-4">+1</button>
+      <button onClick={() => dispatch({ type: "decrement" })} className="bg-red-600 hover:bg-red-700 px-4 py-2 rounded mb-4">-1</button>
+      <button onClick={() => dispatch({ type: "reset" })} className="bg-gray-600 hover:bg-gray-700 px-4 py-2 rounded mb-4">Reset</button>
     </div>
   );
 }
