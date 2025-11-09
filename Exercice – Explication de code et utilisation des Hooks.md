@@ -85,11 +85,43 @@ Voici un code que vous devez **analyser et expliquer**, en vous appuyant sur le 
 
 1. **Expliquez le fonctionnement du code** :
 
-   * Quel est le rôle de `useState` dans `Counter` et `App` ?
-   * À quoi sert `useEffect` ici ?
-   * Quand la fonction de nettoyage est-elle appelée ?
-   * Que se passe-t-il quand on clique sur "Changer le statut" ?
-   * Quelle est la différence entre le **montage**, la **mise à jour**, et le **démontage** du composant `Counter` ?
+   1. Quel est le rôle de `useState` dans `Counter` et `App` ?
+   Dans Counter et dans APP, useState est utilisé pour gérer l'état local du composant dynamiquement.
+
+   Dans Counter, le useState permet de gérer le nombre de clics sur le bouton. Ainsi, à chaque clic, le nombre de clics est incrémenté et le composant est mis à jour, affichant le nombre de clics à l'écran.
+
+   Dans App, le useState permet de gérer le statut du composant Counter. Ainsi, à chaque clic sur le bouton "Changer le statut", le statut est inversé et le composant est mis à jour, affichant ou non le composant Counter.
+
+   2. À quoi sert `useEffect` ici ?
+
+   `useEffect` est utilisé pour faire des actions après chaque rendu du composant. Dans ce cas, il est utilisé pour afficher un message dans la console à chaque fois que le composant se monte ou se démonte.
+
+   (
+   - "'MONTAGE / MISE À JOUR :', count" -> Lors du montage et de la mise à jour du composant (affichage)
+
+   - "'DEMONTAGE :', count" -> Lors du démontage du composant (nettoyage)
+   )
+
+
+   3. Quand la fonction de nettoyage est-elle appelée ?
+
+   La fonction de nettoyage est appelée lorsque le composant est démonté ( juste avant que le composant soit mis a jour où quand le composant est retiré du DOM (quand le statut est 'false')).
+
+   4. Que se passe-t-il quand on clique sur "Changer le statut" ?
+
+   Lorsque l'on clique sur "Changer le statut", le statut est inversé et le composant est mis à jour, affichant ou non le composant Counter.
+
+   5. Quelle est la différence entre le **montage**, la **mise à jour**, et le **démontage** du composant `Counter` ?
+
+   Le montage est l'initialisation du composant (quand le composant est rendu pour la première fois), la mise à jour est la modification du composant (props / états), et le démontage est la destruction du composant (Quand il est retiré du DOM ou lors d'une mise à jour).
+
+   Exemple :
+   - La page vient d'être chargée :
+     - Le composant Counter est monté.
+   - L'utilisateur clique sur "Changer le statut" :
+     - Le composant Counter est démonté si le statut est désactivé, puis remonté uniquement si le statut est réactivé.
+  - L'utilisateur clique sur "+1" :
+     - Le composant Counter est démonté puis remonté (mis à jour).
 
 2. Appuyez-vous sur les concepts vus en cours :
 
@@ -108,7 +140,7 @@ import React, { useReducer } from "react";
 
 function reducer(state, action) {
   switch (action.type) {
-    // TODO 
+    // TODO
     default:
       return state;
   }
@@ -120,7 +152,7 @@ export default function CounterReducer() {
 
   return (
     <div className="p-4 bg-slate-800 rounded-lg text-white">
-    
+
     </div>
   );
 }
